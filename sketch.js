@@ -18,7 +18,12 @@ function setup() {
     capture.hide(); // 隱藏原始影像，僅顯示在畫布上
   } catch (error) {
     console.error('Camera not found:', error);
-    alert('無法找到攝影機，請檢查以下事項：\n1. 攝影機是否已啟用。\n2. 是否允許瀏覽器存取攝影機。\n3. 攝影機是否已正確連接。');
+    alert('無法找到攝影機，請檢查以下事項：\n1. 攝影機是否已啟用。\n2. 是否允許瀏覽器存取攝影機。\n3. 攝影機是否已正確連接。\n4. 如果使用的是筆記型電腦，請確認內建攝影機是否可用。');
+  }
+
+  // 如果攝影機初始化失敗，顯示替代訊息
+  if (!capture) {
+    alert('無法啟動攝影機，請檢查裝置設定。');
   }
 
   // 建立與視訊畫面相同大小的 overlayGraphics
@@ -76,6 +81,10 @@ function drawOverlayGraphics() {
         overlayGraphics.fill(0); // 如果無法取得顏色，使用黑色
       }
       overlayGraphics.ellipse(x + 15, y + 15, 15, 15); // 繪製圓，中心點偏移 15
+    }
+  }
+}
+
     }
   }
 }
