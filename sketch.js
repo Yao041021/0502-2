@@ -74,13 +74,17 @@ function drawOverlayGraphics() {
   for (let y = 0; y < overlayGraphics.height; y += 30) {
     for (let x = 0; x < overlayGraphics.width; x += 30) {
       // 從 capture 中取得相對應位置的顏色
-      if (capture && capture.loadedmetadata) {
-        let col = capture.get(x, y);
-        overlayGraphics.fill(col); // 設定圓的顏色
-      } else {
-        overlayGraphics.fill(0); // 如果無法取得顏色，使用黑色
+      let col = capture && capture.loadedmetadata ? capture.get(x, y) : [0, 0, 0];
+      overlayGraphics.fill(col); // 設定方框的顏色
+      overlayGraphics.rect(x, y, 18, 30); // 繪製方框，寬 18，高 30
+
+      // 在方框中間繪製五個黑色的圓
+      overlayGraphics.fill(0); // 設定圓的顏色為黑色
+      for (let i = 0; i < 5; i++) {
+        let cx = x + 9; // 圓的 x 座標為方框的中心
+        let cy = y + 6 + i * 6; // 圓的 y 座標分佈在方框內
+        overlayGraphics.ellipse(cx, cy, 4, 4); // 繪製圓，直徑為 4
       }
-      overlayGraphics.ellipse(x + 15, y + 15, 15, 15); // 繪製圓，中心點偏移 15
     }
   }
 }
