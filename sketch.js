@@ -65,7 +65,7 @@ function windowResized() {
   // 重新調整 overlayGraphics 的大小
   overlayGraphics = createGraphics(windowWidth * 0.8, windowHeight * 0.8);
   drawOverlayGraphics(); // 重新繪製 overlayGraphics
-}
+} // 修正：補上缺少的括號
 
 function drawOverlayGraphics() {
   overlayGraphics.background(245, 245, 220); // 設定背景為米白色 (RGB: 245, 245, 220)
@@ -81,10 +81,6 @@ function drawOverlayGraphics() {
         overlayGraphics.fill(0); // 如果無法取得顏色，使用黑色
       }
       overlayGraphics.ellipse(x + 15, y + 15, 15, 15); // 繪製圓，中心點偏移 15
-    }
-  }
-}
-
     }
   }
 }
