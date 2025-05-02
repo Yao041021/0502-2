@@ -4,10 +4,18 @@ let overlayGraphics;
 function setup() {
   createCanvas(windowWidth, windowHeight); // 全螢幕畫布
   background('#9E2A2B'); // 設定背景顏色
-  capture = createCapture(VIDEO); // 擷取攝影機影像
-  capture.size(windowWidth * 0.8, windowHeight * 0.8); // 設定影像大小為視窗的 80%
-  // 不再隱藏攝影機影像
-  // capture.hide();
+
+  // 嘗試擷取攝影機影像
+  try {
+    capture = createCapture(VIDEO, (stream) => {
+      console.log('Camera started successfully');
+    });
+    capture.size(windowWidth * 0.8, windowHeight * 0.8); // 設定影像大小為視窗的 80%
+    capture.hide(); // 隱藏原始影像，僅顯示在畫布上
+  } catch (error) {
+    console.error('Camera not found:', error);
+    alert('無法找到攝影機，請檢查裝置是否已啟用並允許瀏覽器存取。');
+  }
 
   // 建立與視訊畫面相同大小的 overlayGraphics
   overlayGraphics = createGraphics(capture.width, capture.height);
